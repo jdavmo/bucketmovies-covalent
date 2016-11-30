@@ -31,8 +31,10 @@ import { appRoutes, appRoutingProviders } from './app.routes';
 
 import { ChartComponent } from '../components/chart/chart.component';
 import { ButtonDisableFix } from '../directives/button-disable-fix.directive';
+import { TmdbService } from '../services/tmdb/tmdb.service';
 
 import { RequestInterceptor } from '../config/interceptors/request.interceptor';
+import { DashboardMoviesComponent } from './dashboard-movies/dashboard-movies.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { RequestInterceptor } from '../config/interceptors/request.interceptor';
     ChartComponent,
     // Bugfix for disabled anchor button in material.alpha-10 (remove in alpha-11)
     ButtonDisableFix,
+    DashboardMoviesComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { RequestInterceptor } from '../config/interceptors/request.interceptor';
   providers: [
     appRoutingProviders,
     Title,
+    TmdbService,
   ], // additional providers needed for this module
   entryComponents: [ TD_LOADING_ENTRY_COMPONENTS ],
   bootstrap: [ AppComponent ],

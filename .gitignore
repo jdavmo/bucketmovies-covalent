@@ -22,6 +22,7 @@ npm-debug.log
 testem.log
 /typings
 /.vagrant
+/src/config/apiTmdb.config.ts
 
 # e2e
 /e2e/*.js
