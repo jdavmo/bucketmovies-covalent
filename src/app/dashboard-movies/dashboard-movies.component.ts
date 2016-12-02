@@ -8,17 +8,9 @@ import { TmdbService } from '../../services/tmdb/tmdb.service';
 })
 export class DashboardMoviesComponent implements OnInit {
 
-  	private movies: any[];
-
-	constructor(private tmdb: TmdbService) {}
+	constructor() {}
 
 	ngOnInit() {
-		this.tmdb.tmdbGetV3('movie/popular', '&language=en-US')
-		.subscribe((result) => {
-			if (result) {
-				this.movies = result.results;
-			}
-		});
 	}
 
 }
