@@ -1,43 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, trigger, state, animate, transition, style } from '@angular/core';
 import { TmdbService } from '../../services/tmdb/tmdb.service';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import { PageTmdb } from '../models/page-tmdb';
+import { MovieTmdb } from '../models/movie-tmdb';
+
 
 @Component({
   	selector: 'app-movies-popular',
   	templateUrl: './movies-popular.component.html',
-  	styleUrls: ['./movies-popular.component.scss']
+  	styleUrls: ['./movies-popular.component.scss'],
+    animations: [
+      trigger('visibilityChanged', [
+        state('shown' , style({ opacity: 1 })),
+        state('hidden', style({ opacity: 0 })),
+        transition('* => *', animate('.5s'))
+      ])
+    ]
 })
 export class MoviesPopularComponent implements OnInit {
 
-	private movies: any[];
-	private movie: any[];
+  visibility = 'shown';
+
+	private pageRes: PageTmdb;
+	private movies: MovieTmdb[];
 	private position: number;
 	private observableTime: any;
 	private page: number;
 	private pages: number;
+  private movieActive: number;
 
   	constructor(private tmdb: TmdbService) {
   		this.page  = 0;
   		this.pages = 0;
+      this.visibility = 'shown';
   	}
 
   	ngOnInit() {
 
-  		this.getPopular();
-
-  	}
-
-  	getPopular() {
-
-  		this.tmdb.tmdbGetV3('movie/popular', '&language=en-US&page='+this.nextPage())
-		.subscribe((result) => {
-			if (result) {
-				this.movies = result.results;
-				this.pages  = result.total_pages;
-				this.slide();
-				this.observableInterval();
-			}
-		});
+      this.tmdb.getPopular( this.nextPage() )
+        .subscribe( res => {
+          this.pageRes = res;
+          this.slide();
+          this.observableInterval();
+        });
 
   	}
 
@@ -54,34 +59,45 @@ export class MoviesPopularComponent implements OnInit {
 
   	slide() {
 
-  		let count = this.movies.length;
+      Observable.timer(500).subscribe(() => {
 
-  		if (!this.movie) {
-  			this.position = 0;
-  			this.movie = [this.movies[this.position]];
-  		} else {
-  			if(this.position == count-1) {
-  				this.position = 0;
-  				this.observableTime.unsubscribe();
-  				this.getPopular();
-  			} else {
-  				this.position++;
-  			}
-  			this.movie = [this.movies[this.position]];
-  		}
+    		let count = this.pageRes.results.length;
 
-  		if(!this.movie[0]['backdrop_path']) {
-  			this.position++;
-  			this.movie = [this.movies[this.position]];
-  		}
+    		if (!this.movies) {
+    			this.position = 0;
+    			//this.movies = [this.pageRes.results[this.position]];
+          this.movies = this.pageRes.results;
+          this.movieActive = this.movies[this.position]['id'];
+    		} else {
+    			if(this.position == count-1) {
+    				this.position = 0;
+    				this.observableTime.unsubscribe();
+    				this.ngOnInit();
+    			} else {
+    				this.position++;
+    			}
+    			this.movies = this.pageRes.results;
+          this.movieActive = this.movies[this.position]['id'];
+    		}
+
+    		if(!this.movies['backdrop_path']) {
+    			this.position++;
+    			this.movies = this.pageRes.results;
+          this.movieActive = this.movies[this.position]['id'];
+    		}
+
+        this.visibility = 'shown';
+
+      });
 
   	}
 
   	observableInterval() {
 
   		this.observableTime = Observable.interval(10000).subscribe(() => {
-			this.slide();
-		});
+          this.visibility = 'hidden';
+          this.slide();
+  		});
 
   	}
 
