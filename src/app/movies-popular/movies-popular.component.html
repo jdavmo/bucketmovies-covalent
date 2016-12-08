@@ -1,0 +1,3 @@
+<template let-movie let-last="last" let-index="index" ngFor [ngForOf]="movies">
+	<img [@visibilityChanged]="visibility" src="http://image.tmdb.org/t/p/w500{{movie.backdrop_path}}" width="100%" class="show" [ngClass]="{active: movie.id === movieActive}">
+</template>

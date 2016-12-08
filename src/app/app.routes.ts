@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardProductComponent } from './dashboard-product/dashboard-product.component';
+import { DashboardMoviesComponent } from './dashboard-movies/dashboard-movies.component';
 import { ProductOverviewComponent } from './dashboard-product/overview/overview.component';
 import { ProductStatsComponent } from './dashboard-product/stats/stats.component';
 import { ProductFeaturesComponent } from './dashboard-product/features/features.component';
@@ -16,9 +17,14 @@ import { FormComponent } from './form/form.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: MainComponent, children: [{
-      component: DashboardComponent,
+  {path: '', component: MainComponent, children: [
+    {
+      component: DashboardMoviesComponent,
       path: '',
+    },
+    {
+      component: DashboardComponent,
+      path: 'dashboard',
     },
     {path: 'product', component: DashboardProductComponent, children: [
       {path: '', component: ProductOverviewComponent},
