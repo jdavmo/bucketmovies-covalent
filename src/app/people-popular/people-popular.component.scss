@@ -1,0 +1,33 @@
+.show {
+  display: none
+}
+.show.active {
+  display: block !important;
+}
+.user-profile {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.pic-circle-corner {
+  width: 200px;
+  height: 200px;
+  margin: .8em auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 5px solid #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.pic-circle-corner > img {
+  margin-top: -20px;
+  max-width: 200px;
+}

@@ -37,7 +37,7 @@ import { RequestInterceptor } from '../config/interceptors/request.interceptor';
 import { DashboardMoviesComponent } from './dashboard-movies/dashboard-movies.component';
 import { MoviesPopularComponent } from './movies-popular/movies-popular.component';
 import { TvPopularComponent } from './tv-popular/tv-popular.component';
-import { AuthorsPopularComponent } from './authors-popular/authors-popular.component';
+import { PeoplePopularComponent } from './people-popular/people-popular.component';
 import { MoviesLatestComponent } from './movies-latest/movies-latest.component';
 import { TvLatestComponent } from './tv-latest/tv-latest.component';
 import { AuthorsLatestComponent } from './authors-latest/authors-latest.component';
@@ -65,7 +65,7 @@ import { NowPlayingComponent } from './now-playing/now-playing.component';
     DashboardMoviesComponent,
     MoviesPopularComponent,
     TvPopularComponent,
-    AuthorsPopularComponent,
+    PeoplePopularComponent,
     MoviesLatestComponent,
     TvLatestComponent,
     AuthorsLatestComponent,

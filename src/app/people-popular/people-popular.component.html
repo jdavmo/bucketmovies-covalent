@@ -1,0 +1,28 @@
+<div *ngFor="let person of people">
+    <div class="pic-circle-corner show"
+         [@visibilityPeopleChanged]="visibilityPeople"
+         [ngClass]="{active: person.id === personActive}">
+         <img src="http://image.tmdb.org/t/p/w300{{person.profile_path}}" />
+    </div>
+    <h2 class="show text-center"
+        [@visibilityPeopleChanged]="visibilityPeople"
+        [ngClass]="{active: person.id === personActive}">
+        {{person.name}}
+    </h2>
+    <div [@visibilityPeopleChanged]="visibilityPeople"
+         [ngClass]="{active: person.id === personActive}"
+         class="show">
+        <md-card-title>Know for</md-card-title>
+        <md-list class="will-load alert-list">
+            <template let-item let-last="last" ngFor [ngForOf]="person.known_for">
+                <md-list-item layout-align="row">
+                    <img md-list-avatar src="http://image.tmdb.org/t/p/w300{{item.poster_path}}" alt>
+                    <h3 md-line *ngIf="item.media_type ==='movie'"> {{item.original_title}} </h3>
+                    <h3 md-line *ngIf="item.media_type ==='tv'"> {{item.name}} </h3>
+                    <p md-line> {{item.media_type}} </p>
+                </md-list-item>
+                <md-divider *ngIf="!last" md-inset></md-divider>
+            </template>
+        </md-list>
+    </div>
+</div>

@@ -2,69 +2,69 @@ import { Component, OnInit, trigger, state, animate, transition, style } from '@
 import { TmdbService } from '../../services/tmdb/tmdb.service';
 import { Observable } from 'rxjs/Observable';
 import { PageTmdb } from '../models/page-tmdb';
-import { MovieTmdb } from '../models/movie-tmdb';
+import { PeopleTmdb } from '../models/people-tmdb';
 
 @Component({
-    selector: 'app-movies-popular',
-    templateUrl: './movies-popular.component.html',
-    styleUrls: ['./movies-popular.component.scss'],
-    animations: [
-      trigger('visibilityMovieChanged', [
+  selector: 'app-people-popular',
+  templateUrl: './people-popular.component.html',
+  styleUrls: ['./people-popular.component.scss'],
+  animations: [
+      trigger('visibilityPeopleChanged', [
         state('shown' , style({ opacity: 1 })),
         state('hidden', style({ opacity: 0 })),
         transition('* => *', animate('.5s'))
       ])
     ]
 })
-export class MoviesPopularComponent implements OnInit {
+export class PeoplePopularComponent implements OnInit {
 
   /*
-   * visibilityMovie is for show and hide the backdrop_path image
+   * visibilityAuthor is for show and hide the backdrop_path image
    * with a small animation
    */
-  visibilityMovie = 'shown';
+  visibilityAuthor = 'shown';
 
   /*
    * Private variables
    */
   private pageRes: PageTmdb;
-  private movies: MovieTmdb[];
+  private people: PeopleTmdb[];
   private position: number = -1;
   private observableTime: any;
-  private movieActive: number;
+  private personActive: number;
 
   constructor(private tmdb: TmdbService) {
-    this.visibilityMovie = 'shown';
+    this.visibilityAuthor = 'shown';
   }
 
   ngOnInit() {
-    this.moviesPopular(1);
+    this.peoplePopular(1);
   }
 
   /*
-   * Getting data about movies popular
+   * Getting data about people popular
    * the pageRes first is set with one interface
    */
-  moviesPopular(page: number) {
-    this.tmdb.getPopularMovies( page )
+  peoplePopular(page: number) {
+    this.tmdb.getPopularPeople( page )
     .subscribe( res => {
       this.pageRes = res;
-      this.movies = this.pageRes.results;
+      this.people = this.pageRes.results;
       this.slide();
       this.observableInterval();
     });
   }
 
   /*
-   * slide allow change the current movies visible by another movie
-   * if the movie is the last movie to show, it call the next page in moviesPopular
+   * slide allow change the current people visible by another person
+   * if the person is the last person to show, it call the next page in peoplePopular
    */
   slide() {
     Observable.timer(500).subscribe(() => {
       let count = this.pageRes.results.length - 1;
-      if (this.movies) {
+      if (this.people) {
         /*
-         * if slide already ran all the movies
+         * if slide already ran all the people
          * it call the next page
          */
         if(this.position == count) {
@@ -76,30 +76,30 @@ export class MoviesPopularComponent implements OnInit {
           /*
            * Call the next page and start again
            */
-          this.moviesPopular(this.tmdb.nextPage(this.pageRes.page, this.pageRes.total_pages));
+          this.peoplePopular(this.tmdb.nextPage(this.pageRes.page, this.pageRes.total_pages));
         } else {
           this.position++;
         }
-        if(!this.movies['backdrop_path']) {
+        if(!this.people['profile_path']) {
           this.position++;
         }
         /*
-         * show the movie
+         * show the person
          */
-        this.movieActive = this.movies[this.position]['id'];
-        this.visibilityMovie = 'shown';
+        this.personActive = this.people[this.position]['id'];
+        this.visibilityAuthor = 'shown';
       }
     });
   }
 
   /*
-   * observableInterval allow call the next movie to show,
-   * every movie is showed by 10sec, after that the interval -
-   * call the function slide to show the next movie.
+   * observableInterval allow call the next person to show,
+   * every person is showed by 10sec, after that the interval -
+   * call the function slide to show the next person.
    */
   observableInterval() {
     this.observableTime = Observable.interval(10000).subscribe(() => {
-      this.visibilityMovie = 'hidden';
+      this.visibilityAuthor = 'hidden';
       this.slide();
     });
   }
