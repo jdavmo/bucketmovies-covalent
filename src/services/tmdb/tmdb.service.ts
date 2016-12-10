@@ -51,4 +51,8 @@ export class TmdbService {
         return this.tmdbGetV3('person/popular', '&language=en-US&page='+page);
     }
 
+    getNowPlayingMovies(page: number) :any {
+        return this.tmdbGetV3('movie/now_playing', '&language=en-US&page='+page);
+    }
+
 }
