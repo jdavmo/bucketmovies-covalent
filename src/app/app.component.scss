@@ -27,4 +27,28 @@
             cursor: pointer;
         }
     }
+    .show {
+      display: none
+    }
+    .show.active {
+      display: block !important;
+    }
+    textarea:focus, input:focus{
+        outline: none !important;
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    *:focus {
+        outline: none !important;
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    input:focus {
+        outline: none !important;
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
 }

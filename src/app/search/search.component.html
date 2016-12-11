@@ -1,0 +1,51 @@
+<md-toolbar>
+    <button md-button md-icon-button>
+      <md-icon>search</md-icon>
+    </button>
+    <span flex>
+      <input type="text" 
+             class="search" 
+             placeholder="Search by movies, series, people..."
+             [(ngModel)]="searchTxt" (ngModelChange)="searchTyping(searchTxt)">
+    </span>
+    <button md-button md-icon-button *ngIf="searchTxt" (click)="clearSearch()">
+      <md-icon>close</md-icon>
+    </button>
+</md-toolbar>
+<md-list class="will-load alert-list search-result" *ngIf="resultSearch">
+    <template let-item let-last="last" ngFor [ngForOf]="resultSearch">
+        <md-list-item layout-align="row" *ngIf="item.media_type === 'person'">
+            <img md-list-avatar src="http://image.tmdb.org/t/p/w300{{item.profile_path}}" alt *ngIf="item.profile_path !== null">
+            <md-icon md-list-avatar *ngIf="item.profile_path === null">person</md-icon>
+            <h3 md-line>
+                {{item.name}}
+            </h3>
+            <p md-line>
+                <span *ngFor="let knowFor of item.known_for; let l = last;">
+                	<span>{{knowFor.original_title}}</span><span *ngIf="!l">, </span>
+                </span>
+            </p>
+        </md-list-item>
+        <md-list-item layout-align="row" *ngIf="item.media_type === 'tv'">
+            <img md-list-avatar src="http://image.tmdb.org/t/p/w300{{item.poster_path}}" alt *ngIf="item.poster_path !== null">
+            <md-icon md-list-avatar *ngIf="item.poster_path === null">live_tv</md-icon>
+            <h3 md-line>
+                {{item.original_name}}
+            </h3>
+            <p md-line>
+                
+            </p>
+        </md-list-item>
+        <md-list-item layout-align="row" *ngIf="item.media_type === 'movie'">
+            <img md-list-avatar src="http://image.tmdb.org/t/p/w300{{item.poster_path}}" alt *ngIf="item.poster_path !== null">
+            <md-icon md-list-avatar *ngIf="item.poster_path === null">local_movies</md-icon>
+            <h3 md-line>
+                {{item.original_title}}
+            </h3>
+            <p md-line>
+            </p>
+        </md-list-item>
+        
+        <md-divider *ngIf="!last" md-inset></md-divider>
+    </template>
+</md-list>

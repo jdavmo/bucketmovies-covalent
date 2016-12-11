@@ -55,4 +55,8 @@ export class TmdbService {
         return this.tmdbGetV3('movie/now_playing', '&language=en-US&page='+page);
     }
 
+    searchMulti(query: string) :any {
+        return this.tmdbGetV3('search/multi', '&language=en-US&query='+query);
+    }
+
 }
