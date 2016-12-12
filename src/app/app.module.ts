@@ -43,6 +43,9 @@ import { TvLatestComponent } from './tv-latest/tv-latest.component';
 import { AuthorsLatestComponent } from './authors-latest/authors-latest.component';
 import { NowPlayingComponent } from './now-playing/now-playing.component';
 import { SearchComponent } from './search/search.component';
+import { MoviePageComponent } from './movie-page/movie-page.component';
+import { TvPageComponent } from './tv-page/tv-page.component';
+import { PersonPageComponent } from './person-page/person-page.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,9 @@ import { SearchComponent } from './search/search.component';
     AuthorsLatestComponent,
     NowPlayingComponent,
     SearchComponent,
+    MoviePageComponent,
+    TvPageComponent,
+    PersonPageComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     BrowserModule,
