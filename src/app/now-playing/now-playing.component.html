@@ -1,3 +1,12 @@
-<p>
-  now-playing works!
-</p>
+<md-list class="will-load alert-list">
+    <template let-item let-last="last" ngFor [ngForOf]="nowPlaying">
+        <md-list-item layout-align="row">
+            <img md-list-avatar src="http://image.tmdb.org/t/p/w300{{item.poster_path}}" alt>
+            <h3 md-line>
+                {{item.original_title}}
+            </h3>
+            <p md-line> {{item.release_date | timeAgo}} </p>
+        </md-list-item>
+        <md-divider *ngIf="!last" md-inset></md-divider>
+    </template>
+</md-list>

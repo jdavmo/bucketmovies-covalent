@@ -1,16 +1,15 @@
-import { Component, OnInit, Input, trigger, state, animate, transition, style } from '@angular/core';
+import { Component, OnInit, trigger, state, animate, transition, style } from '@angular/core';
 import { TmdbService } from '../../services/tmdb/tmdb.service';
 import { Observable } from 'rxjs/Observable';
 import { PageTmdb } from '../models/page-tmdb';
 import { MovieTmdb } from '../models/movie-tmdb';
 
-
 @Component({
-  	selector: 'app-movies-popular',
-  	templateUrl: './movies-popular.component.html',
-  	styleUrls: ['./movies-popular.component.scss'],
+    selector: 'app-movies-popular',
+    templateUrl: './movies-popular.component.html',
+    styleUrls: ['./movies-popular.component.scss'],
     animations: [
-      trigger('visibilityChanged', [
+      trigger('visibilityMovieChanged', [
         state('shown' , style({ opacity: 1 })),
         state('hidden', style({ opacity: 0 })),
         transition('* => *', animate('.5s'))
@@ -19,86 +18,90 @@ import { MovieTmdb } from '../models/movie-tmdb';
 })
 export class MoviesPopularComponent implements OnInit {
 
-  visibility = 'shown';
+  /*
+   * visibilityMovie is for show and hide the backdrop_path image
+   * with a small animation
+   */
+  visibilityMovie = 'shown';
 
-	private pageRes: PageTmdb;
-	private movies: MovieTmdb[];
-	private position: number;
-	private observableTime: any;
-	private page: number;
-	private pages: number;
+  /*
+   * Private variables
+   */
+  private pageRes: PageTmdb;
+  private movies: MovieTmdb[];
+  private position: number = -1;
+  private observableTime: any;
   private movieActive: number;
 
-  	constructor(private tmdb: TmdbService) {
-  		this.page  = 0;
-  		this.pages = 0;
-      this.visibility = 'shown';
-  	}
+  constructor(private tmdb: TmdbService) {
+    this.visibilityMovie = 'shown';
+  }
 
-  	ngOnInit() {
+  ngOnInit() {
+    this.moviesPopular(1);
+  }
 
-      this.tmdb.getPopular( this.nextPage() )
-        .subscribe( res => {
-          this.pageRes = res;
-          this.slide();
-          this.observableInterval();
-        });
+  /*
+   * Getting data about movies popular
+   * the pageRes first is set with one interface
+   */
+  moviesPopular(page: number) {
+    this.tmdb.getPopularMovies( page )
+    .subscribe( res => {
+      this.pageRes = res;
+      this.movies = this.pageRes.results;
+      this.slide();
+      this.observableInterval();
+    });
+  }
 
-  	}
+  /*
+   * slide allow change the current movies visible by another movie
+   * if the movie is the last movie to show, it call the next page in moviesPopular
+   */
+  slide() {
+    Observable.timer(500).subscribe(() => {
+      let count = this.pageRes.results.length - 1;
+      if (this.movies) {
+        /*
+         * if slide already ran all the movies
+         * it call the next page
+         */
+        if(this.position == count) {
+          this.position = 0;
+          /*
+           * Stop observable interval
+           */
+          this.observableTime.unsubscribe();
+          /*
+           * Call the next page and start again
+           */
+          this.moviesPopular(this.tmdb.nextPage(this.pageRes.page, this.pageRes.total_pages));
+        } else {
+          this.position++;
+        }
+        if(!this.movies['backdrop_path']) {
+          this.position++;
+        }
+        /*
+         * show the movie
+         */
+        this.movieActive = this.movies[this.position]['id'];
+        this.visibilityMovie = 'shown';
+      }
+    });
+  }
 
-  	nextPage() {
-
-  		if(this.page === this.pages) {
-  			this.page = 1;
-  		} else {
-  			this.page = this.page + 1;
-  		}
-  		return this.page;
-
-  	}
-
-  	slide() {
-
-      Observable.timer(500).subscribe(() => {
-
-    		let count = this.pageRes.results.length;
-
-    		if (!this.movies) {
-    			this.position = 0;
-    			//this.movies = [this.pageRes.results[this.position]];
-          this.movies = this.pageRes.results;
-          this.movieActive = this.movies[this.position]['id'];
-    		} else {
-    			if(this.position == count-1) {
-    				this.position = 0;
-    				this.observableTime.unsubscribe();
-    				this.ngOnInit();
-    			} else {
-    				this.position++;
-    			}
-    			this.movies = this.pageRes.results;
-          this.movieActive = this.movies[this.position]['id'];
-    		}
-
-    		if(!this.movies['backdrop_path']) {
-    			this.position++;
-    			this.movies = this.pageRes.results;
-          this.movieActive = this.movies[this.position]['id'];
-    		}
-
-        this.visibility = 'shown';
-
-      });
-
-  	}
-
-  	observableInterval() {
-
-  		this.observableTime = Observable.interval(10000).subscribe(() => {
-          this.visibility = 'hidden';
-          this.slide();
-  		});
-
-  	}
+  /*
+   * observableInterval allow call the next movie to show,
+   * every movie is showed by 10sec, after that the interval -
+   * call the function slide to show the next movie.
+   */
+  observableInterval() {
+    this.observableTime = Observable.interval(10000).subscribe(() => {
+      this.visibilityMovie = 'hidden';
+      this.slide();
+    });
+  }
 
 }

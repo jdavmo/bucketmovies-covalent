@@ -1,3 +1,3 @@
-<p>
-  tv-popular works!
-</p>
+<div *ngFor="let tvshow of tvShows">
+	<img [@visibilityTvChanged]="visibilityTv" src="http://image.tmdb.org/t/p/w500{{tvshow.backdrop_path}}" width="100%" class="show" [ngClass]="{active: tvshow.id === tvActive}">
+</div>

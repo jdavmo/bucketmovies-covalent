@@ -14,18 +14,18 @@ import { LogsComponent } from './logs/logs.component';
 import { DetailComponent } from './detail/detail.component';
 import { LoginComponent } from './login/login.component';
 import { FormComponent } from './form/form.component';
+import { MoviePageComponent } from './movie-page/movie-page.component';
+import { TvPageComponent } from './tv-page/tv-page.component';
+import { PersonPageComponent } from './person-page/person-page.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: MainComponent, children: [
-    {
-      component: DashboardMoviesComponent,
-      path: '',
-    },
-    {
-      component: DashboardComponent,
-      path: 'dashboard',
-    },
+    {path: '', component: DashboardMoviesComponent},
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'movie/:id', component: MoviePageComponent},
+    {path: 'tv/:id', component: TvPageComponent},
+    {path: 'person/:id', component: PersonPageComponent},
     {path: 'product', component: DashboardProductComponent, children: [
       {path: '', component: ProductOverviewComponent},
       {path: 'stats', component: ProductStatsComponent},

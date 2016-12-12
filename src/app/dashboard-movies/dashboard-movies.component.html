@@ -1,141 +1,136 @@
 <td-layout-nav >
-  	<div toolbar-content layout="row" layout-align="center center" flex>
-    	<span>BucketMovies</span>
-    	<span flex></span>
-    	<a md-icon-button buttonDisableFix md-tooltip="Docs" href="https://jdavmo.github.io/bucketmovies-covalent/" target="_blank"><md-icon>chrome_reader_mode</md-icon></a>
-    	<a md-icon-button buttonDisableFix md-tooltip="Github" href="https://github.com/jdavmo/bucketmovies-covalent" target="_blank"><md-icon svgSrc="assets/icons/github.svg"></md-icon></a>
-  	</div>
-  	<div class="md-content" flex md-scroll-y>
-    	<div layout="column" layout-gt-sm="row" class="inset">
-      		<div flex-gt-sm="60">
-	        <md-card>
-              
-	            <md-card-title>Popular</md-card-title>
-	            <md-tab-group>
-	              	<md-tab>
-	                	<template md-tab-label>MOVIES</template>
-                    <app-movies-popular></app-movies-popular>
-	              	</md-tab>
-	              	<md-tab>
-	                	<template md-tab-label>TV SHOWS</template>
-                    <app-tv-popular></app-tv-popular>
-	              	</md-tab>
-	              	<md-tab>
-	                	<template md-tab-label>AUTHORS</template>
-                    <app-authors-popular></app-authors-popular>
-	              	</md-tab>
-	            </md-tab-group>
-	        </md-card>
-        	<div layout="row">
-          		<div flex="33" layout="column">
-            		<md-card class="md-card-colored" flex>
-              			<md-card-content class="text-center">
-                			<div class="md-headline">
-                				{{ '2341'| digits }} <md-icon class="tc-green-500 text-sm">arrow_upward</md-icon>
-                			</div>
-                			<md-icon class="icon tc-indigo-700">perm_contact_calendar</md-icon>
-			                <div layout="column">
-			                  	<div class="md-subhead">Active Users</div>
-			                  	<div class="md-caption tc-grey-600">
-			                  		updated {{ '2016-06-17 12:59:59' | timeAgo }}
-			                  	</div>
-			                </div>
-              			</md-card-content>
-            		</md-card>
-          		</div>
-          		<div flex="33" layout="column">
-            		<md-card class="md-card-colored" flex>
-              			<md-card-content class="text-center">
-                			<div class="md-headline">
-                				{{ '72452903343' | bytes }} <md-icon class="tc-red-500 text-sm">arrow_downward</md-icon>
-                			</div>
-                			<md-icon class="icon tc-light-blue-700">sd_storage</md-icon>
-                			<div layout="column">
-                  				<div class="md-subhead">User Disk Usage</div>
-                  				<div class="md-caption tc-grey-600">updated {{ '2016-07-18 11:02:59' | timeAgo }}</div>
-                			</div>
-              			</md-card-content>
-            		</md-card>
-          		</div>
-          		<div flex="33" layout="column">
-            		<md-card class="md-card-colored" flex>
-              			<md-card-content class="text-center">
-                			<div class="md-headline">
-                				{{ '324523' | digits}} <md-icon class="tc-green-500 text-sm">arrow_upward</md-icon>
-                			</div>
-                			<md-icon class="icon tc-cyan-700">receipt</md-icon>
-                			<div layout="column">
-                  				<div class="md-subhead">Pages Viewed</div>
-                  				<div class="md-caption tc-grey-600">
-                  					updated {{ '2016-07-13 09:59:59' | timeAgo }}
-                  				</div>
-                			</div>
-              			</md-card-content>
-            		</md-card>
-          		</div>
-        	</div>
-        	<md-card>
-        		<md-card-title>Latest</md-card-title>
-        		<md-tab-group>
-	              	<md-tab>
-	                	<template md-tab-label>MOVIES</template>
-	              	</md-tab>
-	              	<md-tab>
-	                	<template md-tab-label>TV SHOWS</template>
-	              	</md-tab>
-	              	<md-tab>
-	                	<template md-tab-label>AUTHORS</template>
-	              	</md-tab>
-	            </md-tab-group>
-        	</md-card>
-      	</div>
+  <div toolbar-content layout="row" layout-align="center center" flex>
+    <span>BucketMovies</span>
+    <span flex></span>
+    <a md-icon-button buttonDisableFix md-tooltip="Docs" href="https://jdavmo.github.io/bucketmovies-covalent/" target="_blank"><md-icon>chrome_reader_mode</md-icon></a>
+    <a md-icon-button buttonDisableFix md-tooltip="Github" href="https://github.com/jdavmo/bucketmovies-covalent" target="_blank"><md-icon svgSrc="assets/icons/github.svg"></md-icon></a>
+  </div>
+  <app-search></app-search>
+  <div class="md-content" flex md-scroll-y>
+    <div layout="column" layout-gt-sm="row" class="inset">
+      <div flex-gt-sm="60">
+        <md-card>
+          <md-card-title>Popular Movies</md-card-title>
+          <app-movies-popular></app-movies-popular>
+        </md-card>
+        <div layout="row">
+            <div flex="33" layout="column">
+              <md-card class="md-card-colored" flex>
+                  <md-card-content class="text-center">
+                    <div class="md-headline">
+                      {{ '2341'| digits }} <md-icon class="tc-green-500 text-sm">arrow_upward</md-icon>
+                    </div>
+                    <md-icon class="icon tc-indigo-700">perm_contact_calendar</md-icon>
+                    <div layout="column">
+                        <div class="md-subhead">Active Users</div>
+                        <div class="md-caption tc-grey-600">
+                          updated {{ '2016-06-17 12:59:59' | timeAgo }}
+                        </div>
+                    </div>
+                  </md-card-content>
+              </md-card>
+            </div>
+            <div flex="33" layout="column">
+              <md-card class="md-card-colored" flex>
+                  <md-card-content class="text-center">
+                    <div class="md-headline">
+                      {{ '72452903343' | bytes }} <md-icon class="tc-red-500 text-sm">arrow_downward</md-icon>
+                    </div>
+                    <md-icon class="icon tc-light-blue-700">sd_storage</md-icon>
+                    <div layout="column">
+                        <div class="md-subhead">User Disk Usage</div>
+                        <div class="md-caption tc-grey-600">updated {{ '2016-07-18 11:02:59' | timeAgo }}</div>
+                    </div>
+                  </md-card-content>
+              </md-card>
+            </div>
+            <div flex="33" layout="column">
+              <md-card class="md-card-colored" flex>
+                  <md-card-content class="text-center">
+                    <div class="md-headline">
+                      {{ '324523' | digits}} <md-icon class="tc-green-500 text-sm">arrow_upward</md-icon>
+                    </div>
+                    <md-icon class="icon tc-cyan-700">receipt</md-icon>
+                    <div layout="column">
+                        <div class="md-subhead">Pages Viewed</div>
+                        <div class="md-caption tc-grey-600">
+                          updated {{ '2016-07-13 09:59:59' | timeAgo }}
+                        </div>
+                    </div>
+                  </md-card-content>
+              </md-card>
+            </div>
+        </div>
+        <md-card>
+            <md-card-title>Popular Tv shows</md-card-title>
+            <app-tv-popular></app-tv-popular>
+        </md-card>
+        <div layout="row">
+            <div flex="33" layout="column">
+              <md-card class="md-card-colored" flex>
+                  <md-card-content class="text-center">
+                    <div class="md-headline">
+                      {{ '2341'| digits }} <md-icon class="tc-green-500 text-sm">arrow_upward</md-icon>
+                    </div>
+                    <md-icon class="icon tc-indigo-700">perm_contact_calendar</md-icon>
+                    <div layout="column">
+                        <div class="md-subhead">Active Users</div>
+                        <div class="md-caption tc-grey-600">
+                          updated {{ '2016-06-17 12:59:59' | timeAgo }}
+                        </div>
+                    </div>
+                  </md-card-content>
+              </md-card>
+            </div>
+            <div flex="33" layout="column">
+              <md-card class="md-card-colored" flex>
+                  <md-card-content class="text-center">
+                    <div class="md-headline">
+                      {{ '72452903343' | bytes }} <md-icon class="tc-red-500 text-sm">arrow_downward</md-icon>
+                    </div>
+                    <md-icon class="icon tc-light-blue-700">sd_storage</md-icon>
+                    <div layout="column">
+                        <div class="md-subhead">User Disk Usage</div>
+                        <div class="md-caption tc-grey-600">updated {{ '2016-07-18 11:02:59' | timeAgo }}</div>
+                    </div>
+                  </md-card-content>
+              </md-card>
+            </div>
+            <div flex="33" layout="column">
+              <md-card class="md-card-colored" flex>
+                  <md-card-content class="text-center">
+                    <div class="md-headline">
+                      {{ '324523' | digits}} <md-icon class="tc-green-500 text-sm">arrow_upward</md-icon>
+                    </div>
+                    <md-icon class="icon tc-cyan-700">receipt</md-icon>
+                    <div layout="column">
+                        <div class="md-subhead">Pages Viewed</div>
+                        <div class="md-caption tc-grey-600">
+                          updated {{ '2016-07-13 09:59:59' | timeAgo }}
+                        </div>
+                    </div>
+                  </md-card-content>
+              </md-card>
+            </div>
+        </div>
+      </div>
       <div flex-gt-sm="40">
-      	<md-card>
-      	<md-card-title>Now playing</md-card-title>
-      		<md-card-subtitle>Items requiring attention</md-card-subtitle>
-      		<md-divider></md-divider>
-      		<md-list class="will-load alert-list">
-      			<template tdLoading="alerts.load">
-      				<template let-item let-last="last" ngFor [ngForOf]="alerts">
-      					<md-list-item layout-align="row">
-      						<md-icon md-list-avatar class="bgc-amber-800">{{item.icon}}</md-icon>
-      						<h3 md-line> {{item.description}} </h3>
-      						<p md-line> {{item.name}} </p>
-      					</md-list-item>
-      					<md-divider *ngIf="!last" md-inset></md-divider>
-      				</template>
-      			</template>
-      		</md-list>
-      		<md-divider></md-divider>
-      		<md-card-actions>
-      			<a md-button buttonDisableFix color="accent" class="text-upper" [routerLink]="['/logs']">
-      				<span>View More</span>
-      			</a>
-      		</md-card-actions>
-      	</md-card>
-      	<md-card id="dashboard-favorites-card" class="push-top">
-      		<md-card-title>Latest</md-card-title>
-      		<md-card-subtitle>Your favorite products</md-card-subtitle>
-      		<md-divider></md-divider>
-      		<md-nav-list class="will-load favorite-list">
-      			<template tdLoading="favorites.load">
-      				<template let-item let-last="last" ngFor [ngForOf]="products">
-      					<md-list-item layout-align="row" [routerLink]="['/product']">
-      						<md-icon md-list-avatar>{{item.icon}}</md-icon>
-      						<h3 md-line> {{item.name}} </h3>
-      						<p md-line> {{item.description}} </p>
-      					</md-list-item>
-      					<md-divider *ngIf="!last" md-inset></md-divider>
-      				</template>
-      			</template>
-      		</md-nav-list>
-      		<md-divider></md-divider>
-      		<md-card-actions>
-      			<a md-button buttonDisableFix color="accent" class="text-upper" [routerLink]="['/product']">
-      				<span>View More</span>
-      			</a>
-      		</md-card-actions>
-      	</md-card>
+        <md-card>
+          <md-card-title>People Popular</md-card-title>
+          <app-people-popular></app-people-popular>
+        </md-card>
+        <md-card>
+          <md-card-title>Now playing</md-card-title>
+          <md-card-subtitle>Items requiring attention</md-card-subtitle>
+          <md-divider></md-divider>
+          <app-now-playing></app-now-playing>
+          <md-divider></md-divider>
+          <md-card-actions>
+            <a md-button buttonDisableFix color="accent" class="text-upper" [routerLink]="['/logs']">
+              <span>View More</span>
+            </a>
+          </md-card-actions>
+        </md-card>
       </div>
     </div>
     <md-divider></md-divider>
