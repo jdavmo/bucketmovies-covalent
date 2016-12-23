@@ -1,3 +1,17 @@
 <div *ngFor="let tvshow of tvShows">
-	<img [@visibilityTvChanged]="visibilityTv" src="http://image.tmdb.org/t/p/w500{{tvshow.backdrop_path}}" width="100%" class="show" [ngClass]="{active: tvshow.id === tvActive}">
+    <img [@visibilityTvChanged]="visibilityTv" src="http://image.tmdb.org/t/p/w500{{tvshow.backdrop_path}}" width="100%" class="show" [ngClass]="{active: tvshow.id === tvActive}">
+    <md-card-actions [@visibilityTvChanged]="visibilityTv" class="show info-slide" [ngClass]="{active: tvshow.id === tvActive}">
+        <div layout="row">
+            <div flex layout="row">
+                <h2>{{tvshow.original_name}}</h2>
+                <div layout="row" class="vote">
+                	<md-icon>star</md-icon>
+                	<div class="number">{{tvshow.vote_average}}</div>
+                </div>
+            </div>
+            <a md-button buttonDisableFix color="accent" class="text-upper" [routerLink]="['/tv', tvshow.id]">
+                <span>View More</span>
+            </a>
+        </div>
+    </md-card-actions>
 </div>

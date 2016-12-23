@@ -1,3 +1,17 @@
 <div *ngFor="let movie of movies">
     <img [@visibilityMovieChanged]="visibilityMovie" src="http://image.tmdb.org/t/p/w500{{movie.backdrop_path}}" width="100%" class="show" [ngClass]="{active: movie.id === movieActive}">
+    <md-card-actions [@visibilityMovieChanged]="visibilityMovie" class="show info-slide" [ngClass]="{active: movie.id === movieActive}">
+        <div layout="row">
+            <div flex layout="row">
+                <h2>{{movie.original_title}}</h2>
+                <div layout="row" class="vote">
+                	<md-icon>star</md-icon>
+                	<div class="number">{{movie.vote_average}}</div>
+                </div>
+            </div>
+            <a md-button buttonDisableFix color="accent" class="text-upper" [routerLink]="['/movie', movie.id]">
+                <span>View More</span>
+            </a>
+        </div>
+    </md-card-actions>
 </div>

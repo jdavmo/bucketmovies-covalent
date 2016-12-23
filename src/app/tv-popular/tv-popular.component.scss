@@ -4,3 +4,33 @@
 .show.active {
 	display: block !important;
 }
+
+.info-slide {
+	opacity: 1;
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    left: 0;
+    right: 0;
+
+    h2 {
+        color: #fff;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        margin-left: 10px;
+    }
+    md-icon {
+        color: yellow;
+    }
+    .vote {
+    	margin-top: 9px;
+    	margin-left: 10px;
+    	.number {
+            margin-top: 4px;
+            color: #fff;
+            margin-left: 5px;
+        }
+    }
+
+}
